@@ -9,7 +9,8 @@ const mockUserData = [
     {name:'Mark'},
     {name:'Jill'}
 ]
-// colons are used as variables that be viewed in the params
+
+
 app.get('/users', function(req,res){
     res.json({
         success: true,
@@ -17,6 +18,17 @@ app.get('/users', function(req,res){
         users: mockUserData
     });
 });
+
+// colons are used as variables that be viewed in the params
+app.get('/users/:id', function(req,res){
+    console.log(req.params.id);
+    res.json({
+        success:true,
+        message: 'got one user',
+        user: req.params.id
+    });
+});
+
 
 app.post('/login', function(req, res){
     // Typically passwords are encrypted using something like bcrypt before sending to database
@@ -41,14 +53,6 @@ app.post('/login', function(req, res){
     }
 });
 
-app.get('/users/:id', function(req,res){
-    console.log(req.params.id);
-    res.json({
-        success:true,
-        message: 'got one user',
-        user: req.params.id
-    });
-});
 
 app.listen(8000, function(){
     console.log("Server is running...");
